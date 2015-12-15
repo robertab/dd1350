@@ -1,0 +1,28 @@
+[or(p, q), or(neg(q),r)].
+
+or(p,r).
+
+[
+  [1, or(p,q),		premise],
+  [2, or(neg(q), r),	premise],
+  [
+    [3, p,		assumption],
+    [4, or(p,r),	orint1(3)]
+  ],
+   [
+    [5, q,		assumption],
+    [
+     [6, neg(q),	assumption],
+     [7, q,		copy(5)],
+     [8, cont,		negel(7,6)],
+     [9, r,		contel(8)]
+    ],
+   [
+     [10, r,		assumption],
+     [11, r,		copy(10)]
+   ],
+   [12, r,		orel(2,6,9,10,11)],
+   [13, or(p,r),	orint2(12)]
+  ],
+  [14, or(p,r),		orel(1,3,4,5,13)]
+].

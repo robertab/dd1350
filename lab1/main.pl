@@ -9,7 +9,6 @@ verify(InputFileName) :- see(InputFileName),
 			 seen,
 			 valid_proof_row(Prems, Goal, Proof, []).
 
-
 % Matchar implikationseleminering.
 valid_proof(_, _, [_, P2, impel(R1, R2)], ValidProof):-
     member([R1, P1, _], ValidProof),
@@ -73,7 +72,6 @@ valid_proof(_, _, [_, or(P1, _), orint1(R1)], ValidProof) :-
 valid_proof(_, _, [_, or(_, P2), orint2(R1)], ValidProof) :-
     member([R1, P2, _ ] ,ValidProof).
 
-
 % Matchar PBC.
 valid_proof(_, _, [_, X, pbc(R1, R2)], ValidProof) :-
     member(List1, ValidProof), member([R1, neg(X), assumption], List1),
@@ -95,9 +93,8 @@ valid_proof(Prems, _, [_, X, premise], _):-
 valid_proof(_, _, [_, X, copy(R1)], ValidProof) :-
     member([R1, X, _], ValidProof).
 
-% Försöker fixa antagningsboxar.
+% "Öppnar" antagningsboxar.
 valid_proof(_, _, [[_, _, assumption]|_], _).
-
 
 % Sista fallet. Skickar bara med den sista raden.
 % Vi verifierar också att den sista raden är Goal.
